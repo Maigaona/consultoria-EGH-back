@@ -37,8 +37,8 @@ class ConsultoriaController extends AbstractController
         ", [
             "nombre" => $name,
             "email" => $email,
-            "phone" => $phone,
-            "message" => $message
+            "telefono" => $phone,
+            "mensaje" => $message
         ]);
 
         return new Response();
