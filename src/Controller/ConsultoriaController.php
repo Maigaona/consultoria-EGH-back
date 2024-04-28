@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use Doctrine\ORM\EntityManagerInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,9 +16,11 @@ class ConsultoriaController extends AbstractController
      */
     public function recibeFormulario(
         Request $request,
+        EntityManagerInterface $entityManager,
         LoggerInterface $logger
     ): Response
     {
+        $cn = $entityManager->getConnection();
         $name = $request->get('fname');
         $email = $request->get('femail');
         $phone = $request->get('fphone');
@@ -27,6 +30,16 @@ class ConsultoriaController extends AbstractController
         $logger->info("Recibí email $email");
         $logger->info("Recibí teléfono $phone");
         $logger->info("Recibí mensaje $message");
+
+        $cn->executeStatement("
+            INSERT INTO formularios(nombre, email, telefono, mensaje) VALUES
+            (:nombre, :email, :telefono, :mensaje) 
+        ", [
+            "nombre" => $name,
+            "email" => $email,
+            "phone" => $phone,
+            "message" => $message
+        ]);
 
         return new Response();
     }
