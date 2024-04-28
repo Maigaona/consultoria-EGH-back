@@ -21,4 +21,9 @@ Puede ver la página en funcionamiento entrando a http://127.0.0.1:8000.
 
 ## Front end
 
-Este repositorio ya cuenta con el front end instalado en la carpeta public
+Este repositorio ya cuenta con el front end instalado en la carpeta `public`.
+
+## Base de datos
+
+Instalar MySQL en su computadora, entrar como usuario root y crear la base de datos de la apliación ejecutando los
+comandos del archivo `consultoria_egh.sql`.
